@@ -529,7 +529,6 @@
 <body>
   <div class="app">
 
-    <!-- INTRO SCREEN -->
     <section id="introScreen" class="screen active">
       <div class="topbar">
         <div class="eyebrow">Clinical Evidence Management System</div>
@@ -643,7 +642,6 @@
       </div>
     </section>
 
-    <!-- ACTIVITY SCREEN -->
     <section id="activityScreen" class="screen">
       <div class="topbar">
         <div class="eyebrow">Clinical Evidence Management System</div>
@@ -765,12 +763,12 @@
           question: "What function of the reference entry is most disrupted by this choice?"
         },
         options: [
-          "The reader loses the initial cue that identifies who is responsible for the source.",
-          "The title becomes harder to understand without the organization appearing first.",
-          "The reference emphasizes topic over authorship, which is generally preferred in healthcare writing.",
-          "The order still works because readers can identify the organization later in the entry."
+          "The title gives enough context to orient the reader first.",
+          "The source can still be interpreted once authorship appears later.",
+          "Delaying authorship weakens the opening attribution cue.",
+          "Topic should come first when the document is instructional."
         ],
-        correct: 0,
+        correct: 2,
         rationale: "The beginning of the entry gives the reader an attribution anchor. It signals who is responsible for the source.",
         implication: "In healthcare writing, knowing who produced the source affects how quickly a reader can judge authority and credibility.",
         incorrectFeedback: "Ask what the reader needs first. Before the reader knows the exact work, what cue helps establish responsibility for the source?"
@@ -783,10 +781,10 @@
           question: "Why is this ordering decision weak?"
         },
         options: [
-          "The date is mainly useful for citation formatting rather than for readers.",
-          "Placing the date later reduces how quickly readers can assess the timeliness of the information.",
-          "The title provides enough context for readers to judge whether the source is current.",
-          "Readers typically evaluate sources after locating them, so placement of the date is flexible."
+          "Readers typically focus on content before checking dates.",
+          "Moving the date later slows early evaluation of currency.",
+          "The title usually signals whether information is up to date.",
+          "Date placement mainly affects formatting consistency."
         ],
         correct: 1,
         rationale: "The date appears early because readers often need quick access to recency when evaluating evidence.",
@@ -801,12 +799,12 @@
           question: "What part of the record logic is weakened most?"
         },
         options: [
-          "The reader loses the specific identifier that distinguishes this article from others in the same publication.",
-          "The journal title already provides enough detail to identify the individual article.",
-          "The date becomes more important when the title is not included.",
-          "The reference still functions because the journal name signals the topic area."
+          "The journal name provides enough context to interpret the source.",
+          "Readers can infer the article’s focus from the publication.",
+          "The date becomes the primary identifier when the title is missing.",
+          "Removing the title obscures which specific work is being cited."
         ],
-        correct: 0,
+        correct: 3,
         rationale: "The title identifies the specific work. The journal title identifies the publication environment, not the exact article.",
         implication: "Without the work title, readers have less precision when determining which exact source is being referenced.",
         incorrectFeedback: "Consider the difference between the work itself and the place where it appears. Which part tells the reader exactly what item is being documented?"
@@ -819,10 +817,10 @@
           question: "What is most weakened when the source name is omitted?"
         },
         options: [
-          "The reader has less information about where the article appeared and what type of source it is.",
-          "The article title becomes less accurate without the source name.",
-          "The author name carries enough context to identify the publication.",
-          "The entry still communicates the main idea, so the source name adds limited value."
+          "Without the source name, the publication context is unclear.",
+          "The author name provides enough information about the source.",
+          "The title already indicates the type of document.",
+          "Readers can determine the source after accessing the link."
         ],
         correct: 0,
         rationale: "The source or publication name tells readers where the work appears and helps them recognize the publication context.",
@@ -837,12 +835,12 @@
           question: "Why is this reasoning incomplete?"
         },
         options: [
-          "The link provides access, but the rest of the entry helps readers understand and evaluate what they are accessing.",
-          "Readers usually begin by following the link, so other details are secondary.",
-          "The title and date are mainly included to match citation style expectations.",
-          "A complete reference is helpful, but access is the primary concern for most readers."
+          "Most readers begin by accessing the link before evaluating details.",
+          "A complete reference is useful, but access is the main priority.",
+          "Access alone does not identify or frame the source.",
+          "The title and date primarily serve formatting expectations."
         ],
-        correct: 0,
+        correct: 2,
         rationale: "The URL or DOI gives the retrieval path, but the rest of the reference entry helps readers understand what they are retrieving and why it matters.",
         implication: "A usable evidence record supports retrieval within a larger system of attribution, evaluation, and source recognition.",
         incorrectFeedback: "Think about what a reader needs before clicking. What information helps the reader decide what the source is and whether it is worth retrieving?"
