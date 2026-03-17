@@ -160,6 +160,23 @@
       margin:8px 0 18px;
     }
 
+    .decision-rule{
+      background:#f7faff;
+      border:1px solid #cfe0ff;
+      border-radius:14px;
+      padding:16px;
+      margin-top:14px;
+    }
+
+    .decision-rule ol{
+      margin:8px 0 0 20px;
+      padding:0;
+    }
+
+    .decision-rule li{
+      margin-bottom:6px;
+    }
+
     .button-row{
       display:flex;
       gap:10px;
@@ -513,6 +530,17 @@
 
     .model-box.show{display:block}
 
+    .transfer-box{
+      display:none;
+      margin-top:14px;
+      background:#f7faff;
+      border:1px solid #cfe0ff;
+      border-radius:14px;
+      padding:16px;
+    }
+
+    .transfer-box.show{display:block}
+
     .mini-note{
       font-size:14px;
       color:var(--muted);
@@ -538,6 +566,9 @@
           <strong>identify, evaluate, and retrieve</strong>. A reference entry is not just formatting. It is a structured evidence record.
         </p>
         <p class="muted">
+          <strong>Reference entries are not random formatting steps.</strong> Each part helps the reader do a different job.
+        </p>
+        <p class="muted">
           In this module, you will review documentation situations and determine what function of the reference record is most disrupted.
         </p>
 
@@ -559,6 +590,16 @@
         <p class="muted">
           That order is <strong>who → when → what → where → how to retrieve</strong>. This sequence is functional, not decorative.
         </p>
+
+        <div class="decision-rule">
+          <div class="eyebrow">Evidence Record Check</div>
+          <p class="muted">Use this quick rule during the cases.</p>
+          <ol>
+            <li>Who is responsible for the source?</li>
+            <li>What tells the reader what it is?</li>
+            <li>What helps the reader judge and retrieve it?</li>
+          </ol>
+        </div>
 
         <div class="briefing-grid">
           <div class="concept-card">
@@ -715,6 +756,13 @@
                     A reference entry works as a structured evidence record because it helps readers answer several questions in a useful order. It identifies who produced the source, shows when it was published so readers can judge currency, names the specific work, and provides publication context that helps readers recognize the source type. It then gives the retrieval path through a DOI or URL so the source can be located directly. In healthcare writing, this structure matters because readers may need to verify recommendations, inspect the original evidence, and judge whether the source is current and credible.
                   </p>
                 </div>
+
+                <div class="transfer-box" id="transferBox">
+                  <div class="eyebrow">Transfer Forward</div>
+                  <p>
+                    <strong>When writing:</strong> Build your reference so a reader can identify the source, judge its currency and credibility, and locate it again.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -738,6 +786,15 @@
                 <div class="badge-sub" id="badgeSub">
                   Locked until documentation note reaches 75% competency.
                 </div>
+              </div>
+            </div>
+
+            <div class="sidebar-card">
+              <div class="eyebrow">Evidence Record Check</div>
+              <div class="mini-note">
+                <strong>1.</strong> Who is responsible for the source?<br />
+                <strong>2.</strong> What tells the reader what it is?<br />
+                <strong>3.</strong> What helps the reader judge and retrieve it?
               </div>
             </div>
 
@@ -771,6 +828,7 @@
         correct: 2,
         rationale: "The beginning of the entry gives the reader an attribution anchor. It signals who is responsible for the source.",
         implication: "In healthcare writing, knowing who produced the source affects how quickly a reader can judge authority and credibility.",
+        stabilizer: "This part is doing a specific job in the record.",
         incorrectFeedback: "Ask what the reader needs first. Before the reader knows the exact work, what cue helps establish responsibility for the source?"
       },
       {
@@ -789,6 +847,7 @@
         correct: 1,
         rationale: "The date appears early because readers often need quick access to recency when evaluating evidence.",
         implication: "In healthcare contexts, outdated information can weaken decision-making, so early date placement supports evaluation.",
+        stabilizer: "The issue is not appearance alone; it is reader function.",
         incorrectFeedback: "Focus on evaluation. Which part of a source record helps a reader judge how current the information is?"
       },
       {
@@ -807,6 +866,7 @@
         correct: 3,
         rationale: "The title identifies the specific work. The journal title identifies the publication environment, not the exact article.",
         implication: "Without the work title, readers have less precision when determining which exact source is being referenced.",
+        stabilizer: "This part is doing a specific job in the record.",
         incorrectFeedback: "Consider the difference between the work itself and the place where it appears. Which part tells the reader exactly what item is being documented?"
       },
       {
@@ -825,6 +885,7 @@
         correct: 0,
         rationale: "The source or publication name tells readers where the work appears and helps them recognize the publication context.",
         implication: "Publication context affects how readers interpret the source and how they distinguish it from other kinds of evidence.",
+        stabilizer: "The issue is not appearance alone; it is reader function.",
         incorrectFeedback: "Ask what helps the reader know where this work appeared. What part signals the publication environment, not just the individual article?"
       },
       {
@@ -843,6 +904,7 @@
         correct: 2,
         rationale: "The URL or DOI gives the retrieval path, but the rest of the reference entry helps readers understand what they are retrieving and why it matters.",
         implication: "A usable evidence record supports retrieval within a larger system of attribution, evaluation, and source recognition.",
+        stabilizer: "This part is doing a specific job in the record.",
         incorrectFeedback: "Think about what a reader needs before clicking. What information helps the reader decide what the source is and whether it is worth retrieving?"
       }
     ];
@@ -852,7 +914,7 @@
         key: "identification",
         label: "Identifies the source and who produced it",
         terms: [
-          "author","authors","organization","who produced","who made","producer","source","exact source","identify","identifies","identification","title","specific work"
+          "author","authors","organization","who produced","who made","producer","source","exact source","identify","identifies","identification","specific work"
         ]
       },
       {
@@ -902,6 +964,7 @@
     const verifyMessage = document.getElementById("verifyMessage");
     const revisionNote = document.getElementById("revisionNote");
     const modelBox = document.getElementById("modelBox");
+    const transferBox = document.getElementById("transferBox");
 
     const badgeCard = document.getElementById("badgeCard");
     const badgeTitle = document.getElementById("badgeTitle");
@@ -988,6 +1051,7 @@
           <div class="title">✓ Correct Assessment</div>
           <p><strong>Rationale:</strong> ${c.rationale}</p>
           <p><strong>Professional implication:</strong> ${c.implication}</p>
+          <p>${c.stabilizer}</p>
         `;
         caseStatus.textContent = "Reviewed";
         nextBtn.classList.remove("hidden");
@@ -1046,7 +1110,7 @@
 
       revisionNote.classList.remove("hidden");
       revisionNote.innerHTML = `
-        <strong>Revise your note to address:</strong> ${failed.join("; ")}.
+        <strong>You are close.</strong> Revise your note to address: ${failed.join("; ")}.
       `;
     }
 
@@ -1080,15 +1144,19 @@
       });
 
       if (score >= 3) {
-        verifyMessage.innerHTML = `<strong>Threshold met.</strong> Proceed to model documentation.`;
+        verifyMessage.innerHTML = `<strong>Threshold met.</strong> Your note shows the core functions of the evidence record.`;
         badgeCard.classList.add("earned");
         badgeTitle.textContent = "Evidence Record Certification";
         badgeSub.textContent = "Competency verified. Module 3 complete.";
         modelBox.classList.add("show");
+        transferBox.classList.add("show");
+        revisionNote.classList.add("hidden");
+        revisionNote.innerHTML = "";
       } else {
         verifyMessage.innerHTML = `<strong>Threshold not yet met.</strong> Revise and resubmit.`;
         renderRevisionTargets(results);
         modelBox.classList.remove("show");
+        transferBox.classList.remove("show");
       }
     });
   </script>
