@@ -191,6 +191,10 @@
       border:1px solid var(--line);
     }
 
+    .secondary:hover{
+      background:#e4ebf5;
+    }
+
     .layout{
       display:grid;
       grid-template-columns:minmax(0, 1fr) 300px;
@@ -250,7 +254,7 @@
 
     .case-structure{
       display:grid;
-      gap:12px;
+      gap:10px;
     }
 
     .case-row{
@@ -409,7 +413,7 @@
 
     textarea{
       width:100%;
-      min-height:140px;
+      min-height:150px;
       resize:vertical;
       border:1px solid var(--line);
       border-radius:14px;
@@ -537,12 +541,11 @@
         <div class="eyebrow">Clinical Evidence Management System</div>
         <h1>Module 3 — Evidence Record Protocol</h1>
         <p class="muted">
-          After identifying an appropriate source, a healthcare writer must document it in a form that another reader
-          can <strong>locate, inspect, and verify</strong>. A reference entry is not just formatting. It is an evidence record.
+          After identifying an appropriate source, a healthcare writer must document it in a form that another reader can
+          <strong>identify, evaluate, and retrieve</strong>. A reference entry is not just formatting. It is a structured evidence record.
         </p>
         <p class="muted">
-          In this module, you will review incomplete or flawed reference situations and determine what problem most directly
-          weakens the documentation record.
+          In this module, you will review documentation situations and determine what function of the reference record is most disrupted.
         </p>
 
         <div class="lifecycle">
@@ -556,58 +559,66 @@
       </div>
 
       <div class="topbar">
-        <div class="eyebrow">What You Are Learning to Notice</div>
+        <div class="eyebrow">Functional Order of a Reference Entry</div>
         <div class="briefing-grid">
           <div class="concept-card">
-            <div class="concept-icon">🧾</div>
-            <h3>Identification Details</h3>
-            <p class="muted">A reference entry should identify the exact source being used.</p>
+            <div class="concept-icon">👤</div>
+            <h3>Who made it?</h3>
+            <p class="muted">The reference usually begins with the author or organization because readers need an attribution anchor first.</p>
             <ul>
-              <li>author or organization</li>
-              <li>date or year</li>
-              <li>title</li>
-              <li>source or publication name</li>
+              <li>named author</li>
+              <li>group author</li>
+              <li>institutional responsibility</li>
             </ul>
-            <div class="reminder"><strong>Reminder:</strong> If the reader cannot tell exactly which source you used, the record is weak.</div>
+            <div class="reminder"><strong>Reminder:</strong> The opening tells the reader who is responsible for the source.</div>
           </div>
 
           <div class="concept-card">
-            <div class="concept-icon">🔎</div>
-            <h3>Retrieval Logic</h3>
-            <p class="muted">Documentation should help the reader get back to the source.</p>
+            <div class="concept-icon">📅</div>
+            <h3>When was it produced?</h3>
+            <p class="muted">The date appears early because readers often need to judge recency right away, especially in healthcare contexts.</p>
             <ul>
-              <li>correct ordering</li>
-              <li>usable URL or DOI</li>
-              <li>clear publication context</li>
-              <li>traceable path</li>
+              <li>year of publication</li>
+              <li>full date for news or webpages</li>
+              <li>currency of evidence</li>
             </ul>
-            <div class="reminder"><strong>Reminder:</strong> A reference entry functions like a retrieval map, not just a list of parts.</div>
+            <div class="reminder"><strong>Reminder:</strong> Early date placement supports quick evaluation of timeliness.</div>
           </div>
 
           <div class="concept-card">
-            <div class="concept-icon">✅</div>
-            <h3>Verification</h3>
-            <p class="muted">Readers need enough information to check whether the evidence is real and relevant.</p>
+            <div class="concept-icon">📄</div>
+            <h3>What exactly is it?</h3>
+            <p class="muted">The title identifies the specific work once the source has been anchored by author and date.</p>
             <ul>
-              <li>confirm the source</li>
-              <li>review the original publication</li>
-              <li>inspect the evidence directly</li>
-              <li>evaluate its use</li>
+              <li>article title</li>
+              <li>guideline title</li>
+              <li>report or webpage title</li>
             </ul>
-            <div class="reminder"><strong>Reminder:</strong> Documentation supports checking, not just appearance.</div>
+            <div class="reminder"><strong>Reminder:</strong> The title tells the reader which exact work is being documented.</div>
           </div>
 
           <div class="concept-card">
-            <div class="concept-icon">🏥</div>
-            <h3>Professional Accountability</h3>
-            <p class="muted">In healthcare writing, documentation errors can weaken transparency and trust.</p>
+            <div class="concept-icon">🏷️</div>
+            <h3>Where does it appear?</h3>
+            <p class="muted">The source or publication name helps readers recognize the publication environment and source type.</p>
             <ul>
-              <li>credible communication</li>
-              <li>responsible evidence use</li>
-              <li>clear support for recommendations</li>
-              <li>reader access to the source</li>
+              <li>journal title</li>
+              <li>news outlet</li>
+              <li>organization website</li>
             </ul>
-            <div class="reminder"><strong>Reminder:</strong> When evidence matters, documentation quality matters too.</div>
+            <div class="reminder"><strong>Reminder:</strong> Publication context helps readers interpret what kind of source this is.</div>
+          </div>
+
+          <div class="concept-card">
+            <div class="concept-icon">🔗</div>
+            <h3>How do I get back to it?</h3>
+            <p class="muted">The DOI or URL closes the record by giving the retrieval path after the source is already identified.</p>
+            <ul>
+              <li>DOI</li>
+              <li>stable URL</li>
+              <li>direct access path</li>
+            </ul>
+            <div class="reminder"><strong>Reminder:</strong> Retrieval information matters, but it does not replace the rest of the entry.</div>
           </div>
         </div>
       </div>
@@ -615,16 +626,15 @@
       <div class="principle">
         <div class="eyebrow">Key Principle</div>
         <p>
-          Evidence documentation is the stage where a source becomes a usable record.
-          A good reference entry helps a reader identify, locate, and verify the exact source behind a claim.
+          The order of a reference entry is functional, not decorative. It moves from
+          <strong>who → when → what → where → how to retrieve</strong>.
         </p>
         <p>
-          This is not about citing for decoration. It is about building a record that is
-          <strong>traceable, checkable, and professionally responsible</strong>.
+          In healthcare writing, that structure helps readers identify the source, judge its relevance and currency, and return to the original evidence when needed.
         </p>
       </div>
 
-      <p class="muted">When you are ready, begin the documentation scan and evaluate each evidence record problem.</p>
+      <p class="muted">When you are ready, begin the documentation scan and evaluate each reference-record problem.</p>
 
       <div class="button-row">
         <button class="primary" id="beginBtn">Begin Evidence Record Protocol</button>
@@ -637,8 +647,8 @@
         <div class="eyebrow">Clinical Evidence Management System</div>
         <h1>Module 3 — Evidence Record Protocol</h1>
         <p class="muted module-overview">
-          In this module, you will evaluate documentation problems before a source moves into later citation and integration stages.
-          Your task is to determine what most directly prevents a reference entry from functioning as a usable evidence record.
+          In this module, you will evaluate how a reference entry functions as an evidence record.
+          Your task is to decide what part of the reader’s work is most disrupted in each case.
         </p>
 
         <div class="lifecycle">
@@ -658,7 +668,7 @@
               <div class="case-header">
                 <div>
                   <div class="eyebrow">Module 3 Case</div>
-                  <h2 id="caseTitle">Case 3.1 — Documentation Scan</h2>
+                  <h2 id="caseTitle">Case 3.1 — Documentation Review</h2>
                 </div>
                 <div class="status-pill" id="caseStatus">Active</div>
               </div>
@@ -683,7 +693,7 @@
               <div class="eyebrow">Case Documentation Log</div>
               <h2>Evidence Record Note</h2>
               <p class="muted">
-                Write a brief note explaining <strong>how a reference entry enables location and verification of a source.</strong>
+                Explain <strong>how the structure of a reference entry helps a reader identify, evaluate, and retrieve a source in healthcare writing.</strong>
               </p>
 
               <div class="label">Documentation Note</div>
@@ -700,10 +710,10 @@
                 <div class="criteria-panel" id="criteriaPanel">
                   <div class="eyebrow">Detected Competency Categories</div>
                   <div class="criteria-grid">
-                    <div class="criteria-item">Identifies key source details</div>
-                    <div class="criteria-item">Explains locating or retrieving the source</div>
-                    <div class="criteria-item">Explains verification or checking</div>
-                    <div class="criteria-item">Explains professional responsibility in healthcare communication</div>
+                    <div class="criteria-item">Identifies the source and who produced it</div>
+                    <div class="criteria-item">Explains how structure supports evaluation</div>
+                    <div class="criteria-item">Explains how readers recognize or retrieve the source</div>
+                    <div class="criteria-item">Connects documentation to professional accountability</div>
                   </div>
                 </div>
 
@@ -712,7 +722,7 @@
                 <div class="model-box" id="modelBox">
                   <div class="eyebrow">Model Documentation Statement</div>
                   <p id="modelText">
-                    A reference entry functions as a structured record that identifies the exact source a writer used and gives readers the information they need to locate it again. When the author, date, title, source, and retrieval information are documented clearly, the source can be traced and checked rather than treated as unsupported evidence. In healthcare writing, that matters because readers may need to verify recommendations, review the original publication, and judge whether the evidence is being used responsibly.
+                    A reference entry works as a structured evidence record because it helps readers answer several questions in a useful order. It identifies who produced the source, shows when it was published so readers can judge currency, names the specific work, and provides publication context that helps readers recognize the source type. It then gives the retrieval path through a DOI or URL so the source can be located directly. In healthcare writing, this structure matters because readers may need to verify recommendations, inspect the original evidence, and judge whether the source is current and credible.
                   </p>
                 </div>
               </div>
@@ -724,7 +734,7 @@
           <div class="panel">
             <div class="sidebar-card">
               <div class="eyebrow">Progress</div>
-              <div id="progressText">0 of 4 cases completed</div>
+              <div id="progressText">0 of 5 cases completed</div>
               <div class="progress-track">
                 <div class="progress-fill" id="progressFill"></div>
               </div>
@@ -744,7 +754,7 @@
             <div class="sidebar-card">
               <div class="eyebrow">Module Focus</div>
               <div class="mini-note">
-                Recognize what makes a reference entry usable: identification details, retrieval logic, verification, and professional accountability.
+                Learn the functional order of a reference entry: who, when, what, where, and how to retrieve.
               </div>
             </div>
           </div>
@@ -756,110 +766,129 @@
   <script>
     const cases = [
       {
-        title: "Case 3.1 — Date Review",
+        title: "Case 3.1 — Documentation Review",
         prompt: {
-          situation: "A student is documenting a CDC webpage about blood pressure for a healthcare writing assignment.",
-          documented: "The draft reference includes the organization name, the page title, and the URL, but it does not include a date.",
-          readerNeed: "The instructor may need to verify which version of the webpage the student used.",
-          question: "Which problem most directly weakens the documentation record?"
+          situation: "A student is documenting a clinical guideline from a professional medical organization.",
+          documented: "The student puts the title first and moves the organization name into the middle of the entry.",
+          readerNeed: "A reader needs to know immediately who is responsible for the source before deciding how much authority to give it.",
+          question: "What function of the reference entry is most disrupted by this choice?"
         },
         options: [
-          "The missing date weakens the reader’s ability to identify and verify the version of the source being used.",
-          "The entry is unusable because every reference must begin with an access date.",
-          "The main problem is that the title should be shortened.",
-          "The date does not matter for organization-authored webpages."
+          "The reader loses the immediate attribution anchor that shows who produced the source.",
+          "The title becomes invalid if it appears before the organization.",
+          "The entry fails because every reference must begin with a long title.",
+          "The source can no longer be published once the organization name moves."
         ],
         correct: 0,
-        rationale: "For a webpage that may be updated over time, the date helps identify the version of the source being documented.",
-        implication: "Without a clear date marker, readers have less precision when verifying what evidence was actually used.",
-        incorrectFeedback: "Focus on what helps the reader identify the exact source version. The issue is not style alone; it is traceability."
+        rationale: "The beginning of the entry gives the reader an attribution anchor. It signals who is responsible for the source.",
+        implication: "In healthcare writing, knowing who produced the source affects how quickly a reader can judge authority and credibility.",
+        incorrectFeedback: "Reassessment Needed<br><br>Ask what the reader needs first. Before the reader knows the exact work, what cue helps establish responsibility for the source?"
       },
       {
-        title: "Case 3.2 — Order Review",
+        title: "Case 3.2 — Documentation Review",
         prompt: {
-          situation: "A student is documenting a scholarly journal article for a medication safety discussion.",
-          documented: "The entry includes the authors, year, article title, journal title, volume, issue, and DOI, but the journal title is placed before the article title and the year is moved to the end.",
-          readerNeed: "A reader needs to scan the entry quickly and identify the source accurately.",
-          question: "Why does this ordering problem matter most?"
+          situation: "A student is documenting a webpage about infection prevention for a nursing assignment.",
+          documented: "The student places the date at the very end of the entry because they think readers can check timeliness later.",
+          readerNeed: "A healthcare reader may want to judge immediately whether the information is current enough to use.",
+          question: "Why is this ordering decision weak?"
         },
         options: [
-          "It matters only because instructors prefer polished-looking references.",
-          "It disrupts the entry’s retrieval logic by making the source information less conventionally structured and harder to parse.",
-          "It means the article cannot be cited anywhere in the paper.",
-          "It changes the source into a popular article."
-        ],
-        correct: 1,
-        rationale: "Reference entries follow a conventional sequence so readers can efficiently identify author, date, title, and source container.",
-        implication: "When documentation order breaks down, readers spend more effort decoding the record instead of verifying the evidence.",
-        incorrectFeedback: "Think about function rather than appearance. Ask which answer explains why conventional order helps readers process and retrieve the source."
-      },
-      {
-        title: "Case 3.3 — Source Container Review",
-        prompt: {
-          situation: "A student is documenting an Associated Press news article used in a discussion of a health policy issue.",
-          documented: "The draft reference includes the reporter’s name, the date, the article title, and the URL, but it leaves out the publication name.",
-          readerNeed: "Classmates may need to identify where the article appeared and evaluate the publication context.",
-          question: "Which explanation best identifies the documentation problem?"
-        },
-        options: [
-          "The publication name is unnecessary if the URL is present.",
-          "News articles should never be documented in healthcare writing.",
-          "The missing publication name reduces the reader’s ability to identify the publication context and verify where the article appeared.",
-          "The missing publication name matters only when no author is listed."
+          "The date only matters in journal articles, so moving it changes the source type.",
+          "The entry becomes uncitable because dates can appear only after the title.",
+          "It delays information that readers often need early in order to evaluate currency.",
+          "It matters only because APA prefers a formal appearance."
         ],
         correct: 2,
-        rationale: "The publication or source container helps readers identify where the item appeared and how to locate it again.",
-        implication: "If publication context is missing, retrieval and source evaluation both become weaker.",
-        incorrectFeedback: "Consider what tells the reader where the article was published. Documentation involves publication context as well as access."
+        rationale: "The date appears early because readers often need quick access to recency when evaluating evidence.",
+        implication: "In healthcare contexts, outdated information can weaken decision-making, so early date placement supports evaluation.",
+        incorrectFeedback: "Reassessment Needed<br><br>Focus on reader evaluation. Which source feature might a healthcare reader want to assess early before relying on the information?"
       },
       {
-        title: "Case 3.4 — Retrieval Path Review",
+        title: "Case 3.3 — Documentation Review",
         prompt: {
-          situation: "A student is documenting a clinical practice guideline published online by a professional medical organization.",
-          documented: "The draft reference includes the organization, year, title, and site name, but the URL is wrong and sends readers only to the organization homepage.",
-          readerNeed: "A reader may need to inspect the exact guideline that supports the recommendation.",
-          question: "Which issue is most significant in this case?"
+          situation: "A student is documenting a research article about patient communication.",
+          documented: "The article title is removed because the student thinks the journal title already tells the reader what the source is.",
+          readerNeed: "The reader needs to distinguish the specific work from the publication that contains it.",
+          question: "What part of the record logic is weakened most?"
         },
         options: [
-          "The entry is acceptable because the homepage still shows that the organization exists.",
-          "The broken retrieval path prevents the reader from locating and verifying the exact guideline used.",
-          "The issue is minor because readers can search for the title themselves.",
-          "Guidelines should be summarized rather than referenced directly."
+          "The reader loses the specific work identifier that tells which exact article is being cited.",
+          "The journal title automatically replaces the article title in APA.",
+          "The date becomes less important when the article title is missing.",
+          "Nothing important is lost if the journal title remains."
+        ],
+        correct: 0,
+        rationale: "The title identifies the specific work. The journal title identifies the publication environment, not the exact article.",
+        implication: "Without the work title, readers have less precision when determining which exact source is being referenced.",
+        incorrectFeedback: "Reassessment Needed<br><br>Consider the difference between the work itself and the place where it appears. Which part tells the reader exactly what item is being documented?"
+      },
+      {
+        title: "Case 3.4 — Documentation Review",
+        prompt: {
+          situation: "A student is documenting a news article used in a discussion of a public health issue.",
+          documented: "The entry keeps the reporter, date, and article title but removes the news outlet name.",
+          readerNeed: "The reader needs publication context in order to recognize what kind of source this is and where it appeared.",
+          question: "What is most weakened when the source name is omitted?"
+        },
+        options: [
+          "The article title stops functioning as a title.",
+          "The reader loses publication context that helps identify the source type and location of appearance.",
+          "The URL becomes impossible to use.",
+          "The author name becomes unnecessary once the source name is removed."
         ],
         correct: 1,
-        rationale: "A reference entry must lead readers to the actual source, not merely to a general organization homepage.",
-        implication: "In healthcare writing, a broken retrieval path interrupts evidence verification where precision matters most.",
-        incorrectFeedback: "Return to the purpose of the record. The key question is whether the reader can get back to the exact document used."
+        rationale: "The source or publication name tells readers where the work appears and helps them recognize the publication context.",
+        implication: "Publication context affects how readers interpret the source and how they distinguish it from other kinds of evidence.",
+        incorrectFeedback: "Reassessment Needed<br><br>Ask what helps the reader know where this work appeared. What part signals the publication environment, not just the individual article?"
+      },
+      {
+        title: "Case 3.5 — Documentation Review",
+        prompt: {
+          situation: "A student is documenting an online clinical report and argues that the URL is the only part that really matters.",
+          documented: "They say that as long as readers can click the link, the rest of the entry is mostly optional.",
+          readerNeed: "The reader needs to know what the source is, who produced it, and whether it looks relevant before following the link.",
+          question: "Why is the student’s reasoning incomplete?"
+        },
+        options: [
+          "A URL makes the title and date illegal in APA.",
+          "The link matters, but the rest of the entry helps readers identify, evaluate, and classify what they are retrieving.",
+          "Readers should always retrieve first and interpret later.",
+          "Retrieval information should replace publication context in healthcare writing."
+        ],
+        correct: 1,
+        rationale: "The URL or DOI gives the retrieval path, but the rest of the reference entry helps readers understand what they are retrieving and why it matters.",
+        implication: "A usable evidence record supports retrieval within a larger system of attribution, evaluation, and source recognition.",
+        incorrectFeedback: "Reassessment Needed<br><br>Think about what a reader needs before clicking. What information helps the reader decide what the source is and whether it is worth retrieving?"
       }
     ];
 
     const competencyChecks = [
       {
-        key: "details",
-        label: "Identifies key source details",
+        key: "identification",
+        label: "Identifies the source and who produced it",
         terms: [
-          "author","authors","organization","date","year","title","journal","publication","source","doi","url","details","information","identify","exact source"
+          "author","authors","organization","who produced","who made","producer","source","exact source","identify","identifies","identification","title","specific work"
         ]
       },
       {
-        key: "retrieval",
-        label: "Locating or retrieving the source",
+        key: "evaluation",
+        label: "Explains how structure supports evaluation",
         terms: [
-          "locate","find","retrieve","trace","track","go back","return to","access","look up"
+          "date","year","recent","recency","current","currency","evaluate","evaluation","relevant","relevance","credible","credibility","authority","timely","timeliness"
         ]
       },
       {
-        key: "verification",
-        label: "Verification or checking",
+        key: "recognitionretrieval",
+        label: "Explains how readers recognize or retrieve the source",
         terms: [
-          "verify","verification","check","confirm","review","inspect","supported","evidence"
+          "journal","publication","source type","where it appears","publication context","recognize","recognition","locate","find","retrieve","retrieval","trace","url","doi","link"
         ]
       },
       {
         key: "professional",
-        label: "Professional responsibility",
+        label: "Connects documentation to professional accountability",
         terms: [
-          "professional","responsibility","healthcare","clinical","credibility","trust","transparent","transparency","accountability"
+          "healthcare","clinical","professional","responsibility","accountability","patient","care","communication","trust","transparent","transparency","verify","verification","check evidence"
         ]
       }
     ];
