@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 3 — Evidence Record Protocol</title>
+  <style>
+    :root{
+      --bg:#f4f7fb;
+      --panel:#ffffff;
+      --panel-soft:#eef3f9;
+      --text:#1f2a37;
+      --muted:#5b6b7f;
+      --line:#d6dfeb;
+      --accent:#2b6cb0;
+      --accent-dark:#1e4f86;
+      --success:#1f7a4d;
+      --success-bg:#e8f6ef;
+      --warning:#8a5a00;
+      --warning-bg:#fff4db;
+      --danger:#a12622;
+      --danger-bg:#fdeceb;
+      --locked:#cfd8e3;
+      --earned:#334155;
+      --shadow:0 10px 28px rgba(31,42,55,0.08);
+      --radius:18px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.5;
+    }
+
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:24px 18px 40px;
+    }
+
+    .topbar{
+      display:grid;
+      grid-template-columns: 280px 1fr;
+      gap:20px;
+      align-items:start;
+      margin-bottom:22px;
+    }
+
+    .badge-card,
+    .main-card,
+    .panel,
+    .criteria-card,
+    .diag-card,
+    .model-card{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    .badge-card{
+      padding:18px;
+      position:sticky;
+      top:18px;
+    }
+
+    .badge-shell{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      padding:14px;
+      border-radius:16px;
+      background:var(--panel-soft);
+      border:1px solid var(--line);
+      margin:12px 0 14px;
+    }
+
+    .badge-icon{
+      width:64px;
+      height:64px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      font-size:28px;
+      font-weight:700;
+      background:var(--locked);
+      color:#fff;
+      transition:all .25s ease;
+    }
+
+    .badge-icon.earned{
+      background:var(--earned);
+    }
+
+    .badge-title{
+      font-size:1rem;
+      font-weight:700;
+      margin:0 0 4px;
+    }
+
+    .badge-status{
+      margin:0;
+      color:var(--muted);
+      font-size:.95rem;
+    }
+
+    .lifecycle{
+      margin-top:10px;
+      font-size:.95rem;
+      color:var(--muted);
+    }
+
+    .main-card{
+      padding:24px;
+      min-height:520px;
+    }
+
+    h1,h2,h3{
+      margin-top:0;
+      line-height:1.2;
+    }
+
+    h1{
+      font-size:1.9rem;
+      margin-bottom:10px;
+    }
+
+    h2{
+      font-size:1.4rem;
+      margin-bottom:10px;
+    }
+
+    h3{
+      font-size:1.1rem;
+      margin-bottom:8px;
+    }
+
+    p{
+      margin:0 0 14px;
+    }
+
+    .eyebrow{
+      display:inline-block;
+      margin-bottom:10px;
+      font-size:.85rem;
+      font-weight:700;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      color:var(--accent-dark);
+      background:#e6f0fb;
+      border:1px solid #cfe0f7;
+      padding:6px 10px;
+      border-radius:999px;
+    }
+
+    .intro-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:14px;
+      margin:18px 0 8px;
+    }
+
+    .info-card{
+      background:var(--panel-soft);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:16px;
+    }
+
+    .info-card .icon{
+      font-size:1.4rem;
+      margin-bottom:8px;
+      display:block;
+    }
+
+    .case-meta{
+      display:flex;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-bottom:14px;
+      color:var(--muted);
+      font-size:.95rem;
+    }
+
+    .case-box{
+      background:var(--panel-soft);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:18px;
+      margin-bottom:18px;
+    }
+
+    .choices{
+      display:grid;
+      gap:12px;
+      margin:18px 0 10px;
+    }
+
+    .choice-btn{
+      width:100%;
+      text-align:left;
+      padding:14px 16px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:#fff;
+      cursor:pointer;
+      font-size:1rem;
+      color:var(--text);
+      transition:.15s ease;
+    }
+
+    .choice-btn:hover{
+      border-color:#b7c8de;
+      transform:translateY(-1px);
+    }
+
+    .choice-btn:disabled{
+      cursor:not-allowed;
+      opacity:.75;
+      transform:none;
+    }
+
+    .feedback{
+      border-radius:14px;
+      padding:16px;
+      margin-top:14px;
+      border:1px solid transparent;
+    }
+
+    .feedback.correct{
+      background:var(--success-bg);
+      border-color:#c7e9d6;
+    }
+
+    .feedback.incorrect{
+      background:var(--warning-bg);
+      border-color:#f0db9f;
+    }
+
+    .feedback h3{
+      margin-bottom:6px;
+    }
+
+    .btn-row{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+
+    button.primary,
+    button.secondary{
+      border:none;
+      border-radius:12px;
+      padding:12px 18px;
+      font-size:1rem;
+      font-weight:700;
+      cursor:pointer;
+    }
+
+    button.primary{
+      background:var(--accent);
+      color:#fff;
+    }
+
+    button.primary:hover{
+      background:var(--accent-dark);
+    }
+
+    button.secondary{
+      background:#e9eef6;
+      color:var(--text);
+      border:1px solid var(--line);
+    }
+
+    button.secondary:hover{
+      background:#dde7f4;
+    }
+
+    .hidden{display:none}
+
+    textarea{
+      width:100%;
+      min-height:210px;
+      resize:vertical;
+      border-radius:14px;
+      border:1px solid var(--line);
+      padding:14px;
+      font:inherit;
+      color:var(--text);
+      background:#fff;
+    }
+
+    .panel{
+      padding:18px;
+      margin-top:16px;
+    }
+
+    .criteria-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:14px;
+      margin-top:12px;
+    }
+
+    .criteria-card{
+      padding:16px;
+    }
+
+    .criteria-card h4{
+      margin:0 0 6px;
+      font-size:1rem;
+    }
+
+    .criteria-card p{
+      margin:0;
+      color:var(--muted);
+      font-size:.96rem;
+    }
+
+    .diag-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:14px;
+      margin-top:12px;
+    }
+
+    .diag-card{
+      padding:16px;
+    }
+
+    .diag-pass{
+      border-left:6px solid var(--success);
+    }
+
+    .diag-fail{
+      border-left:6px solid var(--danger);
+    }
+
+    .diag-mark{
+      display:inline-grid;
+      place-items:center;
+      width:28px;
+      height:28px;
+      border-radius:50%;
+      margin-right:8px;
+      font-weight:700;
+      color:#fff;
+      vertical-align:middle;
+    }
+
+    .mark-pass{ background:var(--success); }
+    .mark-fail{ background:var(--danger); }
+
+    .score-box{
+      margin-top:16px;
+      padding:16px;
+      border-radius:14px;
+      background:#edf4ff;
+      border:1px solid #cfe0f7;
+    }
+
+    .model-card{
+      margin-top:16px;
+      padding:18px;
+      background:#f8fbff;
+    }
+
+    .small{
+      font-size:.95rem;
+      color:var(--muted);
+    }
+
+    .footer-note{
+      margin-top:16px;
+      color:var(--muted);
+      font-size:.94rem;
+    }
+
+    @media (max-width:900px){
+      .topbar{
+        grid-template-columns:1fr;
+      }
+      .badge-card{
+        position:static;
+      }
+    }
+
+    @media (max-width:720px){
+      .intro-grid,
+      .criteria-grid,
+      .diag-grid{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <aside class="badge-card">
+        <span class="eyebrow">Lifecycle Progress</span>
+        <h2 style="margin-bottom:6px;">Module 3 Badge</h2>
+        <p class="small">Evidence Record Protocol</p>
+
+        <div class="badge-shell">
+          <div id="badgeIcon" class="badge-icon" aria-hidden="true">📋</div>
+          <div>
+            <p class="badge-title">Documentation Stage</p>
+            <p id="badgeStatus" class="badge-status">Locked — earn this badge by reaching competency on the protocol verification.</p>
+          </div>
+        </div>
+
+        <div class="lifecycle">
+          <strong>Evidence lifecycle:</strong><br />
+          Triage → Intake → <strong>Documentation</strong> → Citation Signals → Integration → Stewardship
+        </div>
+
+        <div class="panel" style="margin-top:16px;">
+          <h3 style="margin-bottom:6px;">Competency Target</h3>
+          <p class="small">Pass at least <strong>3 of 4</strong> documentation competencies to complete this module.</p>
+        </div>
+      </aside>
+
+      <main class="main-card">
+        <!-- INTRO SCREEN -->
+        <section id="introScreen">
+          <span class="eyebrow">Module 3</span>
+          <h1>Evidence Record Protocol</h1>
+          <p>
+            In healthcare writing, a reference entry is not decorative formatting. It is a retrieval record.
+            Its job is to help a reader locate, verify, and evaluate the exact source behind a claim.
+          </p>
+          <p>
+            This module focuses on how reference entries function as structured documentation. You will diagnose
+            what is missing, what is out of order, and what prevents a source from being reliably traced.
+          </p>
+
+          <div class="intro-grid">
+            <div class="info-card">
+              <span class="icon">🧾</span>
+              <h3>What this stage does</h3>
+              <p>
+                Builds a usable evidence record so another clinician, instructor, or reader can identify the source with precision.
+              </p>
+            </div>
+
+            <div class="info-card">
+              <span class="icon">🔎</span>
+              <h3>What you will inspect</h3>
+              <p>
+                Missing authors, dates, titles, source containers, URLs, and ordering problems that disrupt retrieval logic.
+              </p>
+            </div>
+
+            <div class="info-card">
+              <span class="icon">⚠️</span>
+              <h3>What this is not</h3>
+              <p>
+                This is not about memorizing punctuation in isolation. It is about whether the documentation record lets the reader find the source.
+              </p>
+            </div>
+
+            <div class="info-card">
+              <span class="icon">🏥</span>
+              <h3>Professional implication</h3>
+              <p>
+                Weak documentation makes evidence harder to verify. In healthcare contexts, that undermines transparency and trust.
+              </p>
+            </div>
+          </div>
+
+          <div class="btn-row">
+            <button class="primary" onclick="startCases()">Begin Module 3</button>
+          </div>
+        </section>
+
+        <!-- CASE SCREEN -->
+        <section id="caseScreen" class="hidden">
+          <span class="eyebrow">Case Sequence</span>
+          <div class="case-meta">
+            <div><strong id="caseCounter">Case 1 of 4</strong></div>
+            <div id="caseDifficulty">Difficulty: Foundational</div>
+          </div>
+
+          <h2 id="caseTitle">Case title</h2>
+
+          <div class="case-box">
+            <p id="casePrompt"></p>
+          </div>
+
+          <div id="choicesBox" class="choices"></div>
+
+          <div id="feedbackBox" class="feedback hidden"></div>
+
+          <div class="btn-row">
+            <button id="nextCaseBtn" class="primary hidden" onclick="nextCase()">Next Case</button>
+          </div>
+        </section>
+
+        <!-- DOCUMENTATION SCREEN -->
+        <section id="docScreen" class="hidden">
+          <span class="eyebrow">Case Documentation Log</span>
+          <h2>Documentation Note</h2>
+          <p>
+            Explain <strong>how a reference entry enables location and verification of a source</strong> in healthcare writing.
+          </p>
+          <p class="small">
+            Write your response before reviewing the competency criteria.
+          </p>
+
+          <textarea id="docInput" placeholder="Write your documentation note here..."></textarea>
+
+          <div class="btn-row">
+            <button class="primary" onclick="evaluateDocumentation()">Submit Documentation Note</button>
+            <button class="secondary" onclick="resetDocumentation()">Clear Response</button>
+          </div>
+
+          <div id="diagnosticPanel" class="panel hidden">
+            <h3>Protocol Verification</h3>
+            <p class="small">
+              Your response was checked against the module competencies. Review the diagnostic below, revise if needed, and resubmit.
+            </p>
+
+            <div id="diagGrid" class="diag-grid"></div>
+
+            <div id="scoreBox" class="score-box"></div>
+          </div>
+
+          <div id="criteriaPanel" class="panel hidden">
+            <h3>Competency Criteria</h3>
+            <div class="criteria-grid">
+              <div class="criteria-card">
+                <h4>1. Source identification details</h4>
+                <p>Explains that a reference entry includes details that identify the exact source.</p>
+              </div>
+              <div class="criteria-card">
+                <h4>2. Retrieval logic</h4>
+                <p>Explains that documentation helps a reader locate, trace, or retrieve the source.</p>
+              </div>
+              <div class="criteria-card">
+                <h4>3. Verification and transparency</h4>
+                <p>Explains that reference entries support checking, verifying, or confirming evidence.</p>
+              </div>
+              <div class="criteria-card">
+                <h4>4. Healthcare/professional accountability</h4>
+                <p>Connects documentation quality to credibility, responsibility, or safe professional communication.</p>
+              </div>
+            </div>
+          </div>
+
+          <div id="modelPanel" class="model-card hidden">
+            <h3>Model Documentation Note</h3>
+            <p>
+              A reference entry functions as a structured record that identifies exactly which source was used and gives a reader the information needed to locate it again. When the author, date, title, source, and retrieval information are documented clearly, the source can be traced and checked rather than treated as unsupported evidence. In healthcare writing, that matters because readers may need to verify recommendations, review the strength of the source, or return to the original publication for context. Accurate reference entries therefore support transparency, credibility, and professional accountability.
+            </p>
+          </div>
+
+          <div class="footer-note">
+            You may revise and resubmit until you meet the competency threshold.
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const cases = [
+      {
+        title: "Case 1 — Missing date in a patient education handout reference",
+        difficulty: "Foundational",
+        prompt: `A student is documenting a CDC webpage used to support a note about blood pressure prevention. 
+The draft entry includes the organization name, the page title, and the URL, but no publication or update date.
+The source is a public-facing health information page meant to guide readers who may want to revisit the material later.
+
+Which problem most directly affects the quality of this documentation record?`,
+        options: [
+          "The entry is unusable because every reference must include the access date first.",
+          "The missing date weakens the reader’s ability to place and verify the version of the source being used.",
+          "The problem is mainly that the title should be shortened to one or two words.",
+          "The issue is only stylistic because dates do not matter for organization-authored webpages."
+        ],
+        correct: 1,
+        correctFeedback: {
+          verdict: "Correct",
+          rationale: "For a webpage that may be revised over time, the date helps identify the version of the source the writer is documenting.",
+          implication: "Without a clear date marker, healthcare readers have less precision when verifying what evidence was actually used."
+        },
+        incorrectFeedback: "Reassessment Needed<br><br>Focus on what makes a documentation record traceable. Ask which missing element helps a reader identify the exact source version rather than just recognize the topic."
+      },
+      {
+        title: "Case 2 — Order problem in a journal article reference",
+        difficulty: "Developing",
+        prompt: `A student is documenting a scholarly journal article for a medication safety discussion.
+The article has named authors, a publication year, an article title, a journal title, volume and issue information, and a DOI.
+However, the student places the journal title before the article title and moves the year to the end.
+The source is intended for an instructor who needs to verify the exact study.
+
+What is the most important reason this ordering problem matters?`,
+        options: [
+          "It disrupts the reference entry’s retrieval logic by making the source information less conventionally structured and harder to parse.",
+          "It matters only because instructors expect references to look formal.",
+          "It means the article cannot be cited in the paper at all.",
+          "It changes the article from a scholarly source into a popular source."
+        ],
+        correct: 0,
+        correctFeedback: {
+          verdict: "Correct",
+          rationale: "Reference entries follow a conventional sequence so readers can efficiently identify author, date, title, and source container.",
+          implication: "When documentation order breaks down, readers spend more effort decoding the record instead of verifying the evidence."
+        },
+        incorrectFeedback: "Reassessment Needed<br><br>Think about function, not appearance. The question is not whether the entry looks polished; it is whether the sequence supports fast identification and retrieval by a professional reader."
+      },
+      {
+        title: "Case 3 — Missing source container in a news article reference",
+        difficulty: "Intermediate",
+        prompt: `A student wants to document an Associated Press article used in a discussion of a current health policy issue.
+The draft entry includes the reporter’s name, date, article title, and URL, but it leaves out the news organization name.
+The article appears on a public news site and may later be reviewed by classmates comparing source credibility and context.
+
+Which explanation best identifies the documentation problem?`,
+        options: [
+          "The missing organization name reduces the reader’s ability to identify the publication context and verify where the article appeared.",
+          "The URL makes the publication name unnecessary because readers can infer everything from the link.",
+          "The problem is that news articles should never be used in healthcare writing.",
+          "The missing source name matters only if the article has no author."
+        ],
+        correct: 0,
+        correctFeedback: {
+          verdict: "Correct",
+          rationale: "The source container identifies the publication context. That matters for both retrieval and evaluation.",
+          implication: "If the publication context is missing, readers have less basis for confirming where the evidence came from and how it should be interpreted."
+        },
+        incorrectFeedback: "Reassessment Needed<br><br>Consider what part of the reference tells a reader where the item was published. In documentation, identifying the host publication can matter for both location and evaluation."
+      },
+      {
+        title: "Case 4 — Retrieval logic for a guideline document",
+        difficulty: "Advanced",
+        prompt: `A student is documenting a clinical practice guideline published online by a professional medical organization.
+The draft entry includes the organization, year, title, and site name, but the retrieval path is incomplete because the URL was pasted incorrectly and leads only to the organization homepage.
+The source is meant to support a recommendation that readers may need to check directly.
+
+Which issue is most significant in this case?`,
+        options: [
+          "The entry is acceptable because the homepage still shows that the organization exists.",
+          "The main problem is that guidelines should be summarized rather than referenced directly.",
+          "The broken retrieval path prevents the reader from locating and verifying the exact guideline used.",
+          "The issue is minor because readers can search for the title on their own."
+        ],
+        correct: 2,
+        correctFeedback: {
+          verdict: "Correct",
+          rationale: "A reference entry must point readers to the actual source, not merely to a general website or organization landing page.",
+          implication: "In healthcare writing, a broken retrieval path interrupts evidence verification at the point where precision matters most."
+        },
+        incorrectFeedback: "Reassessment Needed<br><br>Return to the purpose of the record. Which answer best addresses whether another reader could get back to the exact document used, rather than merely to the general organization?"
+      }
+    ];
+
+    let currentCase = 0;
+    let answeredCurrent = false;
+    let firstSubmissionMade = false;
+    let badgeEarned = false;
+
+    function startCases(){
+      document.getElementById('introScreen').classList.add('hidden');
+      document.getElementById('caseScreen').classList.remove('hidden');
+      loadCase();
+    }
+
+    function loadCase(){
+      answeredCurrent = false;
+      const c = cases[currentCase];
+      document.getElementById('caseCounter').textContent = `Case ${currentCase + 1} of ${cases.length}`;
+      document.getElementById('caseDifficulty').textContent = `Difficulty: ${c.difficulty}`;
+      document.getElementById('caseTitle').textContent = c.title;
+      document.getElementById('casePrompt').textContent = c.prompt;
+
+      const box = document.getElementById('choicesBox');
+      box.innerHTML = '';
+
+      c.options.forEach((option, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'choice-btn';
+        btn.innerHTML = option;
+        btn.onclick = () => handleAnswer(index);
+        box.appendChild(btn);
+      });
+
+      document.getElementById('feedbackBox').className = 'feedback hidden';
+      document.getElementById('feedbackBox').innerHTML = '';
+      document.getElementById('nextCaseBtn').classList.add('hidden');
+    }
+
+    function handleAnswer(selectedIndex){
+      if(answeredCurrent) return;
+      answeredCurrent = true;
+
+      const c = cases[currentCase];
+      const feedbackBox = document.getElementById('feedbackBox');
+      const choiceButtons = document.querySelectorAll('.choice-btn');
+      choiceButtons.forEach(btn => btn.disabled = true);
+
+      if(selectedIndex === c.correct){
+        feedbackBox.className = 'feedback correct';
+        feedbackBox.innerHTML = `
+          <h3>${c.correctFeedback.verdict}</h3>
+          <p><strong>Rationale:</strong> ${c.correctFeedback.rationale}</p>
+          <p><strong>Professional implication:</strong> ${c.correctFeedback.implication}</p>
+        `;
+      } else {
+        feedbackBox.className = 'feedback incorrect';
+        feedbackBox.innerHTML = `
+          <h3>Reassessment Needed</h3>
+          <p>${c.incorrectFeedback}</p>
+        `;
+      }
+
+      feedbackBox.classList.remove('hidden');
+      document.getElementById('nextCaseBtn').classList.remove('hidden');
+      document.getElementById('nextCaseBtn').textContent = currentCase === cases.length - 1 ? 'Go to Documentation Log' : 'Next Case';
+    }
+
+    function nextCase(){
+      if(currentCase < cases.length - 1){
+        currentCase++;
+        loadCase();
+      } else {
+        document.getElementById('caseScreen').classList.add('hidden');
+        document.getElementById('docScreen').classList.remove('hidden');
+      }
+    }
+
+    function resetDocumentation(){
+      document.getElementById('docInput').value = '';
+    }
+
+    function evaluateDocumentation(){
+      const text = document.getElementById('docInput').value.trim();
+      const normalized = text.toLowerCase();
+
+      const diagGrid = document.getElementById('diagGrid');
+      const scoreBox = document.getElementById('scoreBox');
+      const diagnosticPanel = document.getElementById('diagnosticPanel');
+      const criteriaPanel = document.getElementById('criteriaPanel');
+      const modelPanel = document.getElementById('modelPanel');
+
+      firstSubmissionMade = true;
+      criteriaPanel.classList.remove('hidden');
+      diagnosticPanel.classList.remove('hidden');
+
+      const checks = [
+        {
+          title: "1. Source identification details",
+          pass: includesAny(normalized, [
+            "author", "authors", "date", "year", "title", "journal", "source", "organization", "publication", "doi", "url"
+          ]) && includesAny(normalized, [
+            "identify", "identifies", "identification", "specific source", "exact source", "details", "information"
+          ]),
+          passText: "Your response explains that a reference entry contains details that identify the source.",
+          failText: "Add language explaining which source details make the record identify the exact item used."
+        },
+        {
+          title: "2. Retrieval logic",
+          pass: includesAny(normalized, [
+            "locate", "find", "retrieve", "trace", "return to", "go back", "look up", "access"
+          ]),
+          passText: "Your response explains that the record helps a reader locate or retrieve the source.",
+          failText: "Add a statement showing that documentation allows a reader to locate, trace, or retrieve the source."
+        },
+        {
+          title: "3. Verification and transparency",
+          pass: includesAny(normalized, [
+            "verify", "verification", "check", "confirm", "transparency", "evidence trail", "review"
+          ]),
+          passText: "Your response connects the reference entry to verification or transparent evidence use.",
+          failText: "Add language about checking, confirming, or verifying the evidence through the reference entry."
+        },
+        {
+          title: "4. Healthcare/professional accountability",
+          pass: includesAny(normalized, [
+            "healthcare", "clinical", "professional", "responsibility", "accountability", "credibility", "trust", "safe"
+          ]),
+          passText: "Your response connects documentation quality to professional responsibility in healthcare writing.",
+          failText: "Add a professional implication explaining why accurate documentation matters in healthcare communication."
+        }
+      ];
+
+      let passCount = 0;
+      diagGrid.innerHTML = '';
+
+      checks.forEach(item => {
+        if(item.pass) passCount++;
+
+        const card = document.createElement('div');
+        card.className = `diag-card ${item.pass ? 'diag-pass' : 'diag-fail'}`;
+        card.innerHTML = `
+          <h4>
+            <span class="diag-mark ${item.pass ? 'mark-pass' : 'mark-fail'}">${item.pass ? '✓' : '✕'}</span>
+            ${item.title}
+          </h4>
+          <p>${item.pass ? item.passText : item.failText}</p>
+        `;
+        diagGrid.appendChild(card);
+      });
+
+      const passedModule = passCount >= 3;
+
+      scoreBox.innerHTML = `
+        <strong>Competency Result:</strong> ${passCount}/4 categories met.<br>
+        ${passedModule
+          ? 'Threshold met. You passed the protocol verification for this module.'
+          : 'Threshold not yet met. Revise your note and resubmit to reach at least 3 of 4 categories.'}
+      `;
+
+      if(passedModule){
+        badgeEarned = true;
+        updateBadge();
+        modelPanel.classList.remove('hidden');
+      } else {
+        modelPanel.classList.add('hidden');
+      }
+    }
+
+    function includesAny(text, phrases){
+      return phrases.some(phrase => text.includes(phrase));
+    }
+
+    function updateBadge(){
+      const icon = document.getElementById('badgeIcon');
+      const status = document.getElementById('badgeStatus');
+
+      if(badgeEarned){
+        icon.classList.add('earned');
+        status.textContent = 'Earned — Module 3 completed. Documentation stage secured.';
+      } else {
+        icon.classList.remove('earned');
+        status.textContent = 'Locked — earn this badge by reaching competency on the protocol verification.';
+      }
+    }
+
+    updateBadge();
+  </script>
+</body>
+</html>
