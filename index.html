@@ -433,7 +433,7 @@
       margin-top:16px;
       border:1px solid var(--line);
       border-radius:14px;
-      padding:16px;
+      padding:18px;
       background:var(--panel-alt);
     }
 
@@ -442,23 +442,35 @@
     .score{
       font-size:20px;
       font-weight:700;
-      margin-bottom:12px;
+      margin-bottom:16px;
     }
 
     .diagnostic-grid{
       display:grid;
       grid-template-columns:1fr 1fr;
-      gap:10px;
-      margin-bottom:12px;
+      gap:14px;
+      margin-bottom:14px;
     }
 
     .diag{
-      border-radius:12px;
-      padding:12px;
+      border-radius:14px;
+      padding:14px;
       border:1px solid var(--line);
       background:#fff;
       font-size:14px;
       font-weight:700;
+      min-height:78px;
+      display:flex;
+      align-items:flex-start;
+      gap:8px;
+    }
+
+    .diag-symbol{
+      font-size:18px;
+      line-height:1;
+      font-weight:700;
+      margin-top:1px;
+      flex:0 0 auto;
     }
 
     .diag.pass{
@@ -473,47 +485,30 @@
       background:var(--red-bg);
     }
 
-    .criteria-panel{
-      display:none;
-      margin:12px 0;
-      padding:14px;
-      border:1px solid var(--line);
-      border-radius:14px;
-      background:#fff;
-    }
-
-    .criteria-panel.show{display:block}
-
-    .criteria-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:10px;
-      margin-top:10px;
-    }
-
-    .criteria-item{
-      border:1px solid var(--line);
-      border-radius:12px;
-      background:var(--panel-alt);
-      padding:12px;
-      font-size:14px;
-      color:var(--muted);
-      font-weight:700;
-    }
-
     .verify-message{
-      margin-top:10px;
+      margin-top:4px;
       color:var(--muted);
+      font-size:16px;
+    }
+
+    .revision-note{
+      margin-top:10px;
+      padding:12px 14px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:#fff;
+      color:var(--text);
     }
 
     .model-box{
       display:none;
-      margin-top:14px;
-      background:#fff;
-      border:1px solid var(--line);
-      border-left:5px solid var(--green);
+      margin-top:18px;
+      background:#fcfefe;
+      border:1px solid #cfe5d8;
+      border-left:6px solid var(--green);
       border-radius:14px;
-      padding:16px;
+      padding:18px;
+      box-shadow:0 4px 16px rgba(31,143,95,.06);
     }
 
     .model-box.show{display:block}
@@ -528,7 +523,6 @@
     @media (max-width: 900px){
       .layout{grid-template-columns:1fr}
       .diagnostic-grid{grid-template-columns:1fr}
-      .criteria-grid{grid-template-columns:1fr}
     }
   </style>
 </head>
@@ -560,6 +554,13 @@
 
       <div class="topbar">
         <div class="eyebrow">Functional Order of a Reference Entry</div>
+        <p class="muted">
+          A reference entry is structured in a conventional order because readers ask predictable questions when they encounter evidence.
+        </p>
+        <p class="muted">
+          That order is <strong>who → when → what → where → how to retrieve</strong>. This sequence is functional, not decorative.
+        </p>
+
         <div class="briefing-grid">
           <div class="concept-card">
             <div class="concept-icon">👤</div>
@@ -580,7 +581,7 @@
             <ul>
               <li>year of publication</li>
               <li>full date for news or webpages</li>
-              <li>currency of evidence</li>
+              <li>updated material</li>
             </ul>
             <div class="reminder"><strong>Reminder:</strong> Early date placement supports quick evaluation of timeliness.</div>
           </div>
@@ -592,7 +593,8 @@
             <ul>
               <li>article title</li>
               <li>guideline title</li>
-              <li>report or webpage title</li>
+              <li>report title</li>
+              <li>webpage title</li>
             </ul>
             <div class="reminder"><strong>Reminder:</strong> The title tells the reader which exact work is being documented.</div>
           </div>
@@ -706,18 +708,8 @@
               <div class="verify-box" id="verifyBox">
                 <div class="score" id="scoreLine"></div>
                 <div class="diagnostic-grid" id="diagnosticGrid"></div>
-
-                <div class="criteria-panel" id="criteriaPanel">
-                  <div class="eyebrow">Detected Competency Categories</div>
-                  <div class="criteria-grid">
-                    <div class="criteria-item">Identifies the source and who produced it</div>
-                    <div class="criteria-item">Explains how structure supports evaluation</div>
-                    <div class="criteria-item">Explains how readers recognize or retrieve the source</div>
-                    <div class="criteria-item">Connects documentation to professional accountability</div>
-                  </div>
-                </div>
-
                 <div class="verify-message" id="verifyMessage"></div>
+                <div class="revision-note hidden" id="revisionNote"></div>
 
                 <div class="model-box" id="modelBox">
                   <div class="eyebrow">Model Documentation Statement</div>
@@ -768,97 +760,92 @@
       {
         title: "Case 3.1 — Documentation Review",
         prompt: {
-          situation: "A student is documenting a clinical guideline from a professional medical organization.",
-          documented: "The student puts the title first and moves the organization name into the middle of the entry.",
-          readerNeed: "A reader needs to know immediately who is responsible for the source before deciding how much authority to give it.",
+          situation: "A student is documenting a clinical guideline from a professional medical organization for a nursing assignment.",
+          documented: "The student places the title first and moves the organization name into the middle of the reference entry because the title seems more informative.",
           question: "What function of the reference entry is most disrupted by this choice?"
         },
         options: [
-          "The reader loses the immediate attribution anchor that shows who produced the source.",
-          "The title becomes invalid if it appears before the organization.",
-          "The entry fails because every reference must begin with a long title.",
-          "The source can no longer be published once the organization name moves."
+          "The reader loses the initial cue that identifies who is responsible for the source.",
+          "The title becomes harder to understand without the organization appearing first.",
+          "The reference emphasizes topic over authorship, which is generally preferred in healthcare writing.",
+          "The order still works because readers can identify the organization later in the entry."
         ],
         correct: 0,
         rationale: "The beginning of the entry gives the reader an attribution anchor. It signals who is responsible for the source.",
         implication: "In healthcare writing, knowing who produced the source affects how quickly a reader can judge authority and credibility.",
-        incorrectFeedback: "Reassessment Needed<br><br>Ask what the reader needs first. Before the reader knows the exact work, what cue helps establish responsibility for the source?"
+        incorrectFeedback: "Ask what the reader needs first. Before the reader knows the exact work, what cue helps establish responsibility for the source?"
       },
       {
         title: "Case 3.2 — Documentation Review",
         prompt: {
-          situation: "A student is documenting a webpage about infection prevention for a nursing assignment.",
-          documented: "The student places the date at the very end of the entry because they think readers can check timeliness later.",
-          readerNeed: "A healthcare reader may want to judge immediately whether the information is current enough to use.",
+          situation: "A student is documenting a webpage about infection prevention for a healthcare writing assignment.",
+          documented: "The student places the date at the end of the entry because they assume readers will focus on the content first.",
           question: "Why is this ordering decision weak?"
         },
         options: [
-          "The date only matters in journal articles, so moving it changes the source type.",
-          "The entry becomes uncitable because dates can appear only after the title.",
-          "It delays information that readers often need early in order to evaluate currency.",
-          "It matters only because APA prefers a formal appearance."
+          "The date is mainly useful for citation formatting rather than for readers.",
+          "Placing the date later reduces how quickly readers can assess the timeliness of the information.",
+          "The title provides enough context for readers to judge whether the source is current.",
+          "Readers typically evaluate sources after locating them, so placement of the date is flexible."
         ],
-        correct: 2,
+        correct: 1,
         rationale: "The date appears early because readers often need quick access to recency when evaluating evidence.",
         implication: "In healthcare contexts, outdated information can weaken decision-making, so early date placement supports evaluation.",
-        incorrectFeedback: "Reassessment Needed<br><br>Focus on reader evaluation. Which source feature might a healthcare reader want to assess early before relying on the information?"
+        incorrectFeedback: "Focus on evaluation. Which part of a source record helps a reader judge how current the information is?"
       },
       {
         title: "Case 3.3 — Documentation Review",
         prompt: {
           situation: "A student is documenting a research article about patient communication.",
-          documented: "The article title is removed because the student thinks the journal title already tells the reader what the source is.",
-          readerNeed: "The reader needs to distinguish the specific work from the publication that contains it.",
+          documented: "The student removes the article title because they assume the journal title already indicates what the source is about.",
           question: "What part of the record logic is weakened most?"
         },
         options: [
-          "The reader loses the specific work identifier that tells which exact article is being cited.",
-          "The journal title automatically replaces the article title in APA.",
-          "The date becomes less important when the article title is missing.",
-          "Nothing important is lost if the journal title remains."
+          "The reader loses the specific identifier that distinguishes this article from others in the same publication.",
+          "The journal title already provides enough detail to identify the individual article.",
+          "The date becomes more important when the title is not included.",
+          "The reference still functions because the journal name signals the topic area."
         ],
         correct: 0,
         rationale: "The title identifies the specific work. The journal title identifies the publication environment, not the exact article.",
         implication: "Without the work title, readers have less precision when determining which exact source is being referenced.",
-        incorrectFeedback: "Reassessment Needed<br><br>Consider the difference between the work itself and the place where it appears. Which part tells the reader exactly what item is being documented?"
+        incorrectFeedback: "Consider the difference between the work itself and the place where it appears. Which part tells the reader exactly what item is being documented?"
       },
       {
         title: "Case 3.4 — Documentation Review",
         prompt: {
           situation: "A student is documenting a news article used in a discussion of a public health issue.",
-          documented: "The entry keeps the reporter, date, and article title but removes the news outlet name.",
-          readerNeed: "The reader needs publication context in order to recognize what kind of source this is and where it appeared.",
+          documented: "The entry includes the reporter, date, and article title, but it leaves out the news outlet name.",
           question: "What is most weakened when the source name is omitted?"
         },
         options: [
-          "The article title stops functioning as a title.",
-          "The reader loses publication context that helps identify the source type and location of appearance.",
-          "The URL becomes impossible to use.",
-          "The author name becomes unnecessary once the source name is removed."
+          "The reader has less information about where the article appeared and what type of source it is.",
+          "The article title becomes less accurate without the source name.",
+          "The author name carries enough context to identify the publication.",
+          "The entry still communicates the main idea, so the source name adds limited value."
         ],
-        correct: 1,
+        correct: 0,
         rationale: "The source or publication name tells readers where the work appears and helps them recognize the publication context.",
         implication: "Publication context affects how readers interpret the source and how they distinguish it from other kinds of evidence.",
-        incorrectFeedback: "Reassessment Needed<br><br>Ask what helps the reader know where this work appeared. What part signals the publication environment, not just the individual article?"
+        incorrectFeedback: "Ask what helps the reader know where this work appeared. What part signals the publication environment, not just the individual article?"
       },
       {
         title: "Case 3.5 — Documentation Review",
         prompt: {
-          situation: "A student is documenting an online clinical report and argues that the URL is the only part that really matters.",
-          documented: "They say that as long as readers can click the link, the rest of the entry is mostly optional.",
-          readerNeed: "The reader needs to know what the source is, who produced it, and whether it looks relevant before following the link.",
-          question: "Why is the student’s reasoning incomplete?"
+          situation: "A student is documenting an online clinical report and argues that the URL is the most important part of the reference.",
+          documented: "They suggest that as long as the link is included, the rest of the entry is less critical.",
+          question: "Why is this reasoning incomplete?"
         },
         options: [
-          "A URL makes the title and date illegal in APA.",
-          "The link matters, but the rest of the entry helps readers identify, evaluate, and classify what they are retrieving.",
-          "Readers should always retrieve first and interpret later.",
-          "Retrieval information should replace publication context in healthcare writing."
+          "The link provides access, but the rest of the entry helps readers understand and evaluate what they are accessing.",
+          "Readers usually begin by following the link, so other details are secondary.",
+          "The title and date are mainly included to match citation style expectations.",
+          "A complete reference is helpful, but access is the primary concern for most readers."
         ],
-        correct: 1,
+        correct: 0,
         rationale: "The URL or DOI gives the retrieval path, but the rest of the reference entry helps readers understand what they are retrieving and why it matters.",
         implication: "A usable evidence record supports retrieval within a larger system of attribution, evaluation, and source recognition.",
-        incorrectFeedback: "Reassessment Needed<br><br>Think about what a reader needs before clicking. What information helps the reader decide what the source is and whether it is worth retrieving?"
+        incorrectFeedback: "Think about what a reader needs before clicking. What information helps the reader decide what the source is and whether it is worth retrieving?"
       }
     ];
 
@@ -915,8 +902,8 @@
     const scoreLine = document.getElementById("scoreLine");
     const diagnosticGrid = document.getElementById("diagnosticGrid");
     const verifyMessage = document.getElementById("verifyMessage");
+    const revisionNote = document.getElementById("revisionNote");
     const modelBox = document.getElementById("modelBox");
-    const criteriaPanel = document.getElementById("criteriaPanel");
 
     const badgeCard = document.getElementById("badgeCard");
     const badgeTitle = document.getElementById("badgeTitle");
@@ -951,10 +938,6 @@
           <div class="case-row">
             <div class="case-row-label">What the student documented</div>
             <p>${c.prompt.documented}</p>
-          </div>
-          <div class="case-row">
-            <div class="case-row-label">What the reader needs</div>
-            <p>${c.prompt.readerNeed}</p>
           </div>
           <div class="case-row question-row">
             <div class="case-row-label">Question</div>
@@ -1055,6 +1038,20 @@
       return terms.some(term => text.includes(term));
     }
 
+    function renderRevisionTargets(results) {
+      const failed = results.filter(r => !r.pass).map(r => r.label);
+      if (!failed.length) {
+        revisionNote.classList.add("hidden");
+        revisionNote.innerHTML = "";
+        return;
+      }
+
+      revisionNote.classList.remove("hidden");
+      revisionNote.innerHTML = `
+        <strong>Revise your note to address:</strong> ${failed.join("; ")}.
+      `;
+    }
+
     verifyBtn.addEventListener("click", () => {
       const text = noteField.value.trim().toLowerCase();
       if (!text) return;
@@ -1065,29 +1062,34 @@
       }));
 
       const score = results.filter(r => r.pass).length;
-      const percent = Math.round((score / 4) * 100);
+      const percent = Math.round((score / competencyChecks.length) * 100);
 
       verifyBox.classList.add("show");
-      criteriaPanel.classList.add("show");
+      diagnosticGrid.innerHTML = "";
+      revisionNote.classList.add("hidden");
+      revisionNote.innerHTML = "";
 
       scoreLine.textContent = `Competency Score: ${score}/4 (${percent}%)`;
 
-      diagnosticGrid.innerHTML = "";
       results.forEach(r => {
         const box = document.createElement("div");
         box.className = `diag ${r.pass ? "pass" : "fail"}`;
-        box.textContent = `${r.pass ? "✓" : "✗"} ${r.label}`;
+        box.innerHTML = `
+          <span class="diag-symbol">${r.pass ? "✓" : "✗"}</span>
+          <span>${r.label}</span>
+        `;
         diagnosticGrid.appendChild(box);
       });
 
       if (score >= 3) {
-        verifyMessage.innerHTML = `<strong>Threshold met.</strong> Your note addresses at least 75% of the required concepts.`;
+        verifyMessage.innerHTML = `<strong>Threshold met.</strong> Proceed to model documentation.`;
         badgeCard.classList.add("earned");
         badgeTitle.textContent = "Evidence Record Certification";
         badgeSub.textContent = "Competency verified. Module 3 complete.";
         modelBox.classList.add("show");
       } else {
-        verifyMessage.innerHTML = `Revise and resubmit. You need to address at least 3 of 4 competency areas.`;
+        verifyMessage.innerHTML = `<strong>Threshold not yet met.</strong> Revise and resubmit.`;
+        renderRevisionTargets(results);
         modelBox.classList.remove("show");
       }
     });
